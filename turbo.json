@@ -48,6 +48,21 @@
       "dependsOn": ["build"],
       "cache": false
     },
+    "@pure-ui/pure-ui-demo#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "VITE_*"],
+      "dependsOn": ["@pure-ui/core#build:lib"]
+    },
+    "@pure-ui/pure-ui-demo#build": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["@pure-ui/core#build:lib"],
+      "env": ["NODE_ENV", "VITE_*"]
+    },
+    "@pure-ui/pure-ui-demo#preview": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
     "@pure-ui/docs#dev": {
       "cache": false,
       "persistent": true,

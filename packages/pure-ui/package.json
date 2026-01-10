@@ -12,7 +12,8 @@
       "import": "./dist/pure-ui.es.js",
       "require": "./dist/pure-ui.umd.js"
     },
-    "./style.css": "./dist/core.css"
+    "./style.css": "./dist/core.css",
+    "./dist/core.css": "./dist/core.css"
   },
   "files": ["dist"],
   "scripts": {
