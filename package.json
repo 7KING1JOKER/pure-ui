@@ -1,0 +1,33 @@
+{
+  "name": "pure-ui-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Pure-UI 组件库 Monorepo 项目",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "preview": "turbo preview",
+    "lint": "turbo lint",
+    "type-check": "turbo type-check",
+    "clean": "turbo clean",
+    "format": "prettier --write .",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged",
+    "release": "changeset publish",
+    "docs:dev": "pnpm dev --filter pure-ui-docs",
+    "docs:build": "pnpm build --filter pure-ui-docs"
+  },
+  "devDependencies": {
+    "turbo": "^2.2.3",
+    "prettier": "^3.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "@changesets/cli": "^2.26.0"
+  },
+  "packageManager": "pnpm@10.27.0",
+  "lint-staged": {
+    "*.{js,ts,vue}": ["eslint --fix", "prettier --write"],
+    "*.{json,md}": ["prettier --write"]
+  }
+}

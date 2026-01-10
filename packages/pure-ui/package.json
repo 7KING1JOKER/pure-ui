@@ -1,0 +1,41 @@
+{
+  "name": "@pure-ui/core",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Pure-UI 核心组件库",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/src/index.d.ts",
+      "import": "./dist/pure-ui.es.js",
+      "require": "./dist/pure-ui.umd.js"
+    },
+    "./style.css": "./dist/core.css"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "build:lib": "vue-tsc && vite build --config vite.config.lib.ts",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "type-check": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "vue": "^3.5.18"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.1",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/test-utils": "^2.0.0",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.0",
+    "vite-plugin-dts": "^3.6.4",
+    "vitest": "^1.0.0",
+    "vue-tsc": "^3.0.5"
+  }
+}

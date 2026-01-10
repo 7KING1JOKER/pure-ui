@@ -1,0 +1,69 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "@pure-ui/core#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "VITE_*"]
+    },
+    "@pure-ui/core#build": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build"],
+      "env": ["NODE_ENV", "VITE_*"]
+    },
+    "@pure-ui/core#build:lib": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build"],
+      "env": ["NODE_ENV", "VITE_*"]
+    },
+    "@pure-ui/core#preview": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "@pure-ui/core#lint": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "@pure-ui/core#type-check": {
+      "cache": true
+    },
+    "@pure-ui/core#test": {
+      "cache": true
+    },
+    "@pure-ui/core#clean": {
+      "cache": false
+    },
+    "@pure-ui/examples#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "VITE_*"],
+      "dependsOn": ["@pure-ui/core#build:lib"]
+    },
+    "@pure-ui/examples#build": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["@pure-ui/core#build:lib"],
+      "env": ["NODE_ENV", "VITE_*"]
+    },
+    "@pure-ui/examples#preview": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "@pure-ui/docs#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "VITE_*"],
+      "dependsOn": ["@pure-ui/core#build:lib"]
+    },
+    "@pure-ui/docs#build": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["@pure-ui/core#build:lib"],
+      "env": ["NODE_ENV", "VITE_*"]
+    }
+  },
+  "globalDependencies": [
+    "package.json",
+    "pnpm-lock.yaml",
+    ".env.*",
+    "tsconfig.json"
+  ]
+}
