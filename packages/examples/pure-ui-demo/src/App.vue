@@ -1,10 +1,11 @@
 <template>
-  <div class="demo-container">
+  <div class="demo-container" style="background-color: rgba(0, 0, 0, 0.2);">
     <h1>Pure-UI Button 组件示例</h1>
     
     <section class="demo-section">
       <h2>按钮类型</h2>
       <div class="button-group">
+        <Button type="default">Default</Button>
         <Button type="primary">Primary</Button>
         <Button type="success">Success</Button>
         <Button type="warning">Warning</Button>

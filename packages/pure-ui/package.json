@@ -8,11 +8,18 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/types/src/index.d.ts",
+      "development": {
+        "types": "./src/index.ts",
+        "import": "./src/index.ts"
+      },
+      "types": "./dist/types/pure-ui/src/index.d.ts",
       "import": "./dist/pure-ui.es.js",
       "require": "./dist/pure-ui.umd.js"
     },
-    "./style.css": "./dist/core.css",
+    "./style.css": {
+      "development": "./src/index.ts",
+      "default": "./dist/core.css"
+    },
     "./dist/core.css": "./dist/core.css"
   },
   "files": ["dist"],

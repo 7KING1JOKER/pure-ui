@@ -25,7 +25,7 @@
 
 // 组件属性类型定义
 interface ButtonProps {
-  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info';
+  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default';
   size?: 'large' | 'medium' | 'small';
   disabled?: boolean;
   loading?: boolean;
@@ -34,7 +34,7 @@ interface ButtonProps {
 
 // 组件属性默认值
 withDefaults(defineProps<ButtonProps>(), {
-  type: 'primary',
+  type: 'default',
   size: 'medium',
   disabled: false,
   loading: false,
@@ -66,6 +66,15 @@ const handleClick = (event: MouseEvent) => {
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+}
+
+.pure-button--default {
+  background-color: #ffffff;
+  color: #121314;
+}
+
+.pure-button--default:hover {
+  background-color: #0000000a;
 }
 
 .pure-button--primary {
