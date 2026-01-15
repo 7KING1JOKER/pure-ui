@@ -2,3 +2,6 @@
 
 // 导出Button组件
 export { Button } from './components/Button';
+
+// 导出Card组件
+export { Card } from './components/Card';

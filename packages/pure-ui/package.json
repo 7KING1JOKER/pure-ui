@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Pure-UI 核心组件库",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "development": {

@@ -71,12 +71,236 @@
         </Button>
       </div>
     </section>
+
+    <section class="demo-section">
+      <h2>Card - 垂直布局（col）</h2>
+      <div class="card-group">
+        <Card type="col" :shadow="true" :bordered="true">
+          <template #header>
+            <h3>卡片标题</h3>
+          </template>
+          <template #default>
+            <p>这是卡片的主要内容区域。可以放置任何内容，包括文本、图片、表单等。</p>
+          </template>
+          <template #footer>
+            <Button type="primary" size="small">操作</Button>
+          </template>
+        </Card>
+
+        <Card type="col" :shadow="false" :bordered="true">
+          <template #header>
+            <h3>无边框卡片</h3>
+          </template>
+          <template #default>
+            <p>这个卡片没有阴影效果，但有边框。</p>
+          </template>
+        </Card>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Card - 水平布局（row）</h2>
+      <div class="card-group">
+        <Card type="row" :shadow="true" :bordered="true">
+          <template #left>
+            <div class="card-left-content">
+              <h4>左侧</h4>
+              <p>侧边栏内容</p>
+            </div>
+          </template>
+          <template #default>
+            <div class="card-main-content">
+              <h4>主内容</h4>
+              <p>这是卡片的主要内容区域。</p>
+              <p>可以放置大量的文本、图片或其他组件。</p>
+            </div>
+          </template>
+          <template #right>
+            <div class="card-right-content">
+              <h4>右侧</h4>
+              <p>侧边栏内容</p>
+            </div>
+          </template>
+        </Card>
+
+        <Card type="row" :shadow="true" :bordered="false">
+          <template #left>
+            <div class="card-left-content">
+              <h4>无框左侧</h4>
+            </div>
+          </template>
+          <template #default>
+            <div class="card-main-content">
+              <h4>无边框主内容</h4>
+              <p>这个卡片没有边框，但有阴影效果。</p>
+            </div>
+          </template>
+          <template #right>
+            <div class="card-right-content">
+              <h4>无框右侧</h4>
+            </div>
+          </template>
+        </Card>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Card - 样式组合</h2>
+      <div class="card-group">
+        <Card type="col" :shadow="true" :bordered="true">
+          <template #header>
+            <h3>阴影 + 边框</h3>
+          </template>
+          <template #default>
+            <p>同时显示阴影和边框的卡片。</p>
+          </template>
+        </Card>
+
+        <Card type="col" :shadow="false" :bordered="false">
+          <template #header>
+            <h3>无阴影 + 无边框</h3>
+          </template>
+          <template #default>
+            <p>简洁的卡片样式，没有阴影和边框。</p>
+          </template>
+        </Card>
+
+        <Card type="col" :shadow="true" :bordered="false">
+          <template #header>
+            <h3>仅阴影</h3>
+          </template>
+          <template #default>
+            <p>只有阴影效果的卡片。</p>
+          </template>
+        </Card>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Card - 可选插槽（垂直布局）</h2>
+      <div class="card-group">
+        <Card type="col" :shadow="true" :bordered="true">
+          <template #header>
+            <h3>只有 Header</h3>
+          </template>
+          <template #default>
+            <p>这个卡片只有 header 和 body，没有 footer。</p>
+          </template>
+        </Card>
+
+        <Card type="col" :shadow="true" :bordered="true">
+          <template #default>
+            <p>这个卡片只有 body，没有 header 和 footer。</p>
+          </template>
+        </Card>
+
+        <Card type="col" :shadow="true" :bordered="true">
+          <template #default>
+            <p>这个卡片只有 body 和 footer，没有 header。</p>
+          </template>
+          <template #footer>
+            <Button type="primary" size="small">确认</Button>
+          </template>
+        </Card>
+
+        <Card type="col" :shadow="true" :bordered="true">
+          <template #header>
+            <h3>完整卡片</h3>
+          </template>
+          <template #default>
+            <p>这个卡片包含 header、body 和 footer 三个部分。</p>
+          </template>
+          <template #footer>
+            <Button type="primary" size="small">操作</Button>
+          </template>
+        </Card>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Card - 可选插槽（水平布局）</h2>
+      <div class="card-group">
+        <Card type="row" :shadow="true" :bordered="true">
+          <template #default>
+            <div class="card-main-content">
+              <h4>只有 Body</h4>
+              <p>这个卡片只有 body，没有 left 和 right。</p>
+            </div>
+          </template>
+        </Card>
+
+        <Card type="row" :shadow="true" :bordered="true">
+          <template #left>
+            <div class="card-left-content">
+              <h4>左侧栏</h4>
+              <p>侧边栏内容</p>
+            </div>
+          </template>
+          <template #default>
+            <div class="card-main-content">
+              <h4>Left + Body</h4>
+              <p>这个卡片有 left 和 body，没有 right。</p>
+            </div>
+          </template>
+        </Card>
+
+        <Card type="row" :shadow="true" :bordered="true">
+          <template #default>
+            <div class="card-main-content">
+              <h4>Body + Right</h4>
+              <p>这个卡片有 body 和 right，没有 left。</p>
+            </div>
+          </template>
+          <template #right>
+            <div class="card-right-content">
+              <h4>右侧栏</h4>
+              <p>侧边栏内容</p>
+            </div>
+          </template>
+        </Card>
+
+        <Card type="row" :shadow="true" :bordered="true">
+          <template #left>
+            <div class="card-left-content">
+              <h4>完整左侧</h4>
+              <p>侧边栏内容</p>
+            </div>
+          </template>
+          <template #default>
+            <div class="card-main-content">
+              <h4>完整卡片</h4>
+              <p>这个卡片包含 left、body 和 right 三个部分。</p>
+            </div>
+          </template>
+          <template #right>
+            <div class="card-right-content">
+              <h4>完整右侧</h4>
+              <p>侧边栏内容</p>
+            </div>
+          </template>
+        </Card>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Card - 鼠标悬停效果</h2>
+      <div class="card-group">
+        <Card type="col" :shadow="true" :bordered="true" :hovered="true">
+          <template #header>
+            <h3>悬停卡片</h3>
+          </template>
+          <template #default>
+            <p>鼠标悬停时会有轻微的.translateY(-2px)效果。</p>
+          </template>
+        </Card>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Button } from '@pure-ui/core';
+import { Button, Card } from '@pure-ui/core';
 
 const clickCount = ref(0);
 
@@ -124,6 +348,41 @@ h1 {
 
 .button-group .pure-button {
   margin: 0;
+}
+
+.card-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card-group .pure-card {
+  flex: 1;
+  min-width: 300px;
+}
+
+.card-left-content,
+.card-main-content,
+.card-right-content {
+  padding: 10px;
+}
+
+.card-left-content h4,
+.card-main-content h4,
+.card-right-content h4 {
+  margin: 0 0 10px 0;
+  color: #303133;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.card-left-content p,
+.card-main-content p,
+.card-right-content p {
+  margin: 0 0 10px 0;
+  color: #606266;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 .click-info {
