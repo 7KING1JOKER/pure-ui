@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 
-// 组件属性类型定义
+// Card 组件属性类型定义
 interface CardProps {
   type?: 'col' | 'row';
   shadow?: boolean;
@@ -36,7 +36,7 @@ interface CardProps {
   hovered?: boolean;
 }
 
-// 组件属性默认值
+// Card 组件属性默认值
 withDefaults(defineProps<CardProps>(), {
   type: 'col',
   shadow: false,

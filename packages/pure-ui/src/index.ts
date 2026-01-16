@@ -5,3 +5,7 @@ export { Button } from './components/Button';
 
 // 导出Card组件
 export { Card } from './components/Card';
+
+// 导出Message组件
+export { Message } from './components/Message';
+export { message } from './components/Message';

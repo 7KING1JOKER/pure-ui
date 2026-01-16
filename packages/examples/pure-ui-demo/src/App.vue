@@ -72,6 +72,7 @@
       </div>
     </section>
 
+    <h1>Pure-UI Card 组件示例</h1>
     <section class="demo-section">
       <h2>Card - 垂直布局（col）</h2>
       <div class="card-group">
@@ -295,18 +296,53 @@
         </Card>
       </div>
     </section>
+
+    <h1>Pure-UI Message 组件示例</h1>
+    <section class="demo-section">
+      <h2>Message - 消息提示</h2>
+      <div class="message-group">
+        <Button type="default" @click="showMessage('default')">默认消息</Button>
+        <Button type="primary" @click="showMessage('primary')">主要消息</Button>
+        <Button type="success" @click="showMessage('success')">成功消息</Button>
+        <Button type="danger" @click="showMessage('error')">错误消息</Button>
+        <Button type="warning" @click="showMessage('warning')">警告消息</Button>
+        <Button type="info" @click="showMessage('info')">信息消息</Button>
+      </div>
+      <p class="message-info">
+        点击按钮显示不同类型的消息提示，鼠标悬停时停止计时器，移开后继续计时。
+      </p>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Button, Card } from '@pure-ui/core';
+import { Button, Card, message } from '@pure-ui/core';
 
 const clickCount = ref(0);
 
 const handleClick = () => {
   clickCount.value++;
   console.log('Button clicked!', clickCount.value);
+};
+
+const showMessage = (type: 'default' | 'primary' | 'success' | 'error' | 'warning' | 'info') => {
+  const messages = {
+    default: '默认消息',
+    primary: '主要消息',
+    success: '操作成功！',
+    error: '操作失败！',
+    warning: '请注意！',
+    info: '提示信息'
+  };
+  
+  const messageText = messages[type];
+  
+  message[type](messageText, {
+    duration: 3000,
+    offset: 20,
+    showClose: true
+  });
 };
 </script>
 
@@ -389,5 +425,19 @@ h1 {
   margin-top: 16px;
   color: #409eff;
   font-size: 14px;
+}
+
+.message-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.message-info {
+  margin-top: 16px;
+  color: #606266;
+  font-size: 14px;
+  line-height: 1.6;
 }
 </style>

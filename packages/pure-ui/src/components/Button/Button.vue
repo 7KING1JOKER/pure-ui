@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 
-// 组件属性类型定义
+// Button 组件属性类型定义
 interface ButtonProps {
   type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default';
   size?: 'large' | 'medium' | 'small';
@@ -32,7 +32,7 @@ interface ButtonProps {
   block?: boolean;
 }
 
-// 组件属性默认值
+// Button 组件属性默认值
 withDefaults(defineProps<ButtonProps>(), {
   type: 'default',
   size: 'medium',
@@ -41,7 +41,7 @@ withDefaults(defineProps<ButtonProps>(), {
   block: false
 });
 
-// 组件事件定义
+// Button 组件事件定义
 const emit = defineEmits<{
   (e: 'click', event: MouseEvent): void;
 }>();
@@ -79,7 +79,7 @@ const handleClick = (event: MouseEvent) => {
 
 .pure-button--primary {
   background-color: #409eff;
-  color: #fff;
+  color: #ffffff;
 }
 
 .pure-button--primary:hover {
@@ -87,12 +87,12 @@ const handleClick = (event: MouseEvent) => {
 }
 
 .pure-button--success {
-  background-color: #67c23a;
-  color: #fff;
+  background-color: #93f363;
+  color: #00000066;
 }
 
 .pure-button--success:hover {
-  background-color: #85ce61;
+  background-color: #97f16a82;
 }
 
 .pure-button--warning {
