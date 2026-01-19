@@ -32,8 +32,8 @@ function createMessage(options: MessageOptions) {
   if (messageInstances.length === 0) {
     currentOffset = offset;
   } else {
-    let len = messageInstances.length - 1;
-    currentOffset = offset + messageInstances[len].offset + 30;
+    let pos = messageInstances.length - 1;
+    currentOffset = offset + messageInstances[pos].offset + 30;
   }
 
   const app = createApp(Message, {

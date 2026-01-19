@@ -338,6 +338,7 @@ const showMessage = (type: 'default' | 'primary' | 'success' | 'error' | 'warnin
   
   const messageText = messages[type];
   
+  // 动态访问 message 组件方法
   message[type](messageText, {
     duration: 3000,
     offset: 20,
