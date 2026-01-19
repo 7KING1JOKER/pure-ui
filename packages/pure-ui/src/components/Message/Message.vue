@@ -1,28 +1,35 @@
 <template>
-  <div 
-    v-if="visible" 
-    :class="[
-      'pure-message--container',
-      `pure-message--${type}`
-    ]"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
+  <Transition 
+    name="message" 
+    appear
+    @after-leave="handleAfterLeave"
   >
-    <div class="pure-message--content">
-      <div class="pure-message--icon">
-        <span v-if="type === 'default'">ℹ️</span>
-        <span v-else-if="type === 'primary'">🔵</span>
-        <span v-else-if="type === 'success'">✅</span>
-        <span v-else-if="type === 'error'">❌</span>
-        <span v-else-if="type === 'warning'">⚠️</span>
-        <span v-else>ℹ️</span>
-      </div>
-      <div class="pure-message--text">{{ message }}</div>
-      <div v-if="showClose" class="pure-message--close" @click="handleClose">
-        ✕
+    <div 
+      v-if="visible" 
+      :class="[
+        'pure-message--container',
+        `pure-message--${type}`
+      ]"
+      :style="{ top: offset + 'px' }"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+    >
+      <div class="pure-message--content">
+        <div class="pure-message--icon">
+          <span v-if="type === 'default'">ℹ️</span>
+          <span v-else-if="type === 'primary'">🔵</span>
+          <span v-else-if="type === 'success'">✅</span>
+          <span v-else-if="type === 'error'">❌</span>
+          <span v-else-if="type === 'warning'">⚠️</span>
+          <span v-else>ℹ️</span>
+        </div>
+        <div class="pure-message--text">{{ message }}</div>
+        <div v-if="showClose" class="pure-message--close" @click="handleClose">
+          ✕
+        </div>
       </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
@@ -69,6 +76,9 @@ function clearTimer() {
 function handleClose() {
   clearTimer();
   visible.value = false;
+}
+
+function handleAfterLeave() {
   emit('close');
   if (props.onClose) {
     props.onClose();
@@ -95,22 +105,19 @@ onMounted(() => {
 <style scoped>
 .pure-message--container {
   position: fixed;
-  top: v-bind('offset + "px"');
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
-  height: 20px;
+  height: 15px;
   min-width: 250px;
   max-width: 350px;
   padding: 12px 20px;
   border-radius: 4px;
   background-color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #00000034;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  animation: slideDown 0.3s ease;
 }
 
 .pure-message--default {
@@ -141,18 +148,6 @@ onMounted(() => {
 .pure-message--info {
   background-color: #f4f4f5;
   color: #909399;
-}
-
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
 }
 
 .pure-message--content {
@@ -187,5 +182,45 @@ onMounted(() => {
 
 .pure-message--close:hover {
   color: #409eff;
+}
+
+/* Message 动画样式 */
+@keyframes messageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes messageFadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+@keyframes messageSlideUp {
+  from {
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.message-enter-active {
+  animation: messageFadeIn 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.message-leave-active {
+  animation: messageFadeOut 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 </style>

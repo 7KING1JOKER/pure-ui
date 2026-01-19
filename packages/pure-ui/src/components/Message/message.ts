@@ -9,7 +9,12 @@ interface MessageOptions {
   showClose?: boolean;
 }
 
-const messageInstances: any[] = [];
+interface MessageInstance {
+  container: HTMLElement;
+  offset: number;
+}
+
+const messageInstances: MessageInstance[] = [];
 
 function createMessage(options: MessageOptions) {
   const {
@@ -23,17 +28,23 @@ function createMessage(options: MessageOptions) {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
+  let currentOffset: number;
+  if (messageInstances.length === 0) {
+    currentOffset = offset;
+  } else {
+    let len = messageInstances.length - 1;
+    currentOffset = offset + messageInstances[len].offset + 30;
+  }
+
   const app = createApp(Message, {
     message,
     type,
     duration,
-    offset: offset + messageInstances.length * 60,
+    offset: currentOffset,
     showClose,
     visible: true,
     onClose: () => {
-      app.unmount();
-      document.body.removeChild(container);
-      const index = messageInstances.indexOf(container);
+      const index = messageInstances.findIndex(m => m.container === container);
       if (index > -1) {
         messageInstances.splice(index, 1);
       }
@@ -41,7 +52,7 @@ function createMessage(options: MessageOptions) {
   });
 
   const instance = app.mount(container);
-  messageInstances.push(container);
+  messageInstances.push({ container, offset: currentOffset });
 
   return instance;
 }
