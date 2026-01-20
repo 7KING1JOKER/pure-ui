@@ -61,85 +61,85 @@ const handleClick = (event: MouseEvent) => {
   white-space: nowrap;
   text-align: center;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
 }
 
 .pure-button--default {
-  background-color: #ffffff;
-  color: #121314;
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
 
 .pure-button--default:hover {
-  background-color: #0000000a;
+  background-color: var(--color-disabled-bg);
 }
 
 .pure-button--primary {
-  background-color: #409eff;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
 
 .pure-button--primary:hover {
-  background-color: #66b1ff;
+  background-color: var(--color-primary-hover);
 }
 
 .pure-button--success {
-  background-color: #93f363;
-  color: #00000066;
+  background-color: var(--color-success);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .pure-button--success:hover {
-  background-color: #97f16a82;
+  background-color: var(--color-success-hover);
 }
 
 .pure-button--warning {
-  background-color: #e6a23c;
-  color: #fff;
+  background-color: var(--color-warning);
+  color: var(--color-white);
 }
 
 .pure-button--warning:hover {
-  background-color: #ebb563;
+  background-color: var(--color-warning-hover);
 }
 
 .pure-button--danger {
-  background-color: #f56c6c;
-  color: #fff;
+  background-color: var(--color-danger);
+  color: var(--color-white);
 }
 
 .pure-button--danger:hover {
-  background-color: #f78989;
+  background-color: var(--color-danger-hover);
 }
 
 .pure-button--info {
-  background-color: #909399;
-  color: #fff;
+  background-color: var(--color-info);
+  color: var(--color-white);
 }
 
 .pure-button--info:hover {
-  background-color: #a6a9ad;
+  background-color: var(--color-info-hover);
 }
 
 .pure-button--large {
-  font-size: 16px;
-  padding: 12px 24px;
+  font-size: var(--font-size-large);
+  padding: var(--spacing-sm) var(--spacing-xl);
 }
 
 .pure-button--medium {
-  font-size: 14px;
-  padding: 10px 20px;
+  font-size: var(--font-size-medium);
+  padding: var(--spacing-xs) var(--spacing-lg);
 }
 
 .pure-button--small {
-  font-size: 12px;
-  padding: 8px 16px;
+  font-size: var(--font-size-small);
+  padding: var(--spacing-xs) var(--spacing-md);
 }
 
 .pure-button--disabled,
 .pure-button--disabled:hover {
-  background-color: #c0c4cc;
+  background-color: var(--color-disabled);
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -150,7 +150,7 @@ const handleClick = (event: MouseEvent) => {
 }
 
 .pure-button__loading {
-  margin-right: 8px;
+  margin-right: var(--spacing-xs);
   animation: spin 1s linear infinite;
 }
 

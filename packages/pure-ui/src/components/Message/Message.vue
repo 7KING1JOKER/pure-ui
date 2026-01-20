@@ -75,7 +75,6 @@ function clearTimer() {
 
 function handleClose() {
   clearTimer();
-  emit('close');
   if (props.onClose) {
     props.onClose();
   }
@@ -108,60 +107,60 @@ onMounted(() => {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999;
+  z-index: var(--z-index-message);
   height: 15px;
   min-width: 250px;
   max-width: 350px;
-  padding: 12px 20px;
-  border-radius: 4px;
-  background-color: #fff;
-  border: 1px solid #00000034;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-white);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .pure-message--default {
-  background-color: #ffffff;
-  color: #121314;
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
 
 .pure-message--primary {
   background-color: #ecf5ff;
-  color: #409eff;
+  color: var(--color-primary);
 }
 
 .pure-message--success {
   background-color: #f0f9ff;
-  color: #67c23a;
+  color: var(--color-success);
 }
 
 .pure-message--error {
   background-color: #fef0f0;
-  color: #f56c6c;
+  color: var(--color-danger);
 }
 
 .pure-message--warning {
   background-color: #fdf6ec;
-  color: #e6a23c;
+  color: var(--color-warning);
 }
 
 .pure-message--info {
   background-color: #f4f4f5;
-  color: #909399;
+  color: var(--color-info);
 }
 
 .pure-message--content {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 14px;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-medium);
   line-height: 1.5;
 }
 
 .pure-message--icon {
-  font-size: 16px;
+  font-size: var(--font-size-large);
   flex-shrink: 0;
   order: 1;
 }
@@ -173,16 +172,16 @@ onMounted(() => {
 
 .pure-message--close {
   cursor: pointer;
-  color: #909399;
-  font-size: 14px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-medium);
   flex-shrink: 0;
-  transition: color 0.3s;
+  transition: color var(--transition-base);
   padding: 4px;
   order: 3;
 }
 
 .pure-message--close:hover {
-  color: #409eff;
+  color: var(--color-primary);
 }
 
 /* Message 动画样式 */
@@ -218,10 +217,10 @@ onMounted(() => {
 }
 
 .message-enter-active {
-  animation: messageFadeIn 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: messageFadeIn var(--transition-slow) cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .message-leave-active {
-  animation: messageFadeOut 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: messageFadeOut var(--transition-slow) cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 </style>

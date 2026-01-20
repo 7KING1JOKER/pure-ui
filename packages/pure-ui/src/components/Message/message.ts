@@ -48,10 +48,12 @@ function createMessage(options: MessageOptions) {
       if (index > -1) {
         messageInstances.splice(index, 1);
       }
-      app.unmount();
-      if (document.body.contains(container)) {
-        document.body.removeChild(container);
-      }
+      setTimeout(() => {
+        app.unmount();
+        if (document.body.contains(container)) {
+          document.body.removeChild(container);
+        }
+      }, 400);
     }
   });
 
