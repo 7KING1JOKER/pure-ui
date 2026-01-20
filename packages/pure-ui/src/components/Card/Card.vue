@@ -1,11 +1,11 @@
 <template>
-  <div 
+  <div
     :class="[
       'pure-card',
       `pure-card--${type}`,
       { 'pure-card--shadow': shadow },
       { 'pure-card--bordered': bordered },
-      { 'pure-card--hovered': hovered }
+      { 'pure-card--hovered': hovered },
     ]"
   >
     <div v-if="type === 'col' && $slots.header" class="pure-card__header">
@@ -27,13 +27,12 @@
 </template>
 
 <script setup lang="ts">
-
 // Card 组件属性类型定义
 interface CardProps {
-  type?: 'col' | 'row';
-  shadow?: boolean;
-  bordered?: boolean;
-  hovered?: boolean;
+  type?: 'col' | 'row'
+  shadow?: boolean
+  bordered?: boolean
+  hovered?: boolean
 }
 
 // Card 组件属性默认值
@@ -41,8 +40,8 @@ withDefaults(defineProps<CardProps>(), {
   type: 'col',
   shadow: false,
   bordered: true,
-  hovered: false
-});
+  hovered: false,
+})
 </script>
 
 <style scoped>

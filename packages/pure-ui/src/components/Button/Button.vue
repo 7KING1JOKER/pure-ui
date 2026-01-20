@@ -1,20 +1,32 @@
 <template>
-  <button 
+  <button
     :class="[
       'pure-button',
       `pure-button--${type}`,
       `pure-button--${size}`,
       { 'pure-button--disabled': disabled },
       { 'pure-button--loading': loading },
-      { 'pure-button--block': block }
+      { 'pure-button--block': block },
     ]"
     :disabled="disabled || loading"
     @click="handleClick"
   >
     <span v-if="loading" class="pure-button__loading">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <circle cx="12" cy="12" r="10"></circle>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        <path
+          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+        ></path>
       </svg>
     </span>
     <slot></slot>
@@ -22,14 +34,13 @@
 </template>
 
 <script setup lang="ts">
-
 // Button 组件属性类型定义
 interface ButtonProps {
-  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default';
-  size?: 'large' | 'medium' | 'small';
-  disabled?: boolean;
-  loading?: boolean;
-  block?: boolean;
+  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default'
+  size?: 'large' | 'medium' | 'small'
+  disabled?: boolean
+  loading?: boolean
+  block?: boolean
 }
 
 // Button 组件属性默认值
@@ -38,18 +49,18 @@ withDefaults(defineProps<ButtonProps>(), {
   size: 'medium',
   disabled: false,
   loading: false,
-  block: false
-});
+  block: false,
+})
 
 // Button 组件事件定义
 const emit = defineEmits<{
-  (e: 'click', event: MouseEvent): void;
-}>();
+  (_e: 'click', _event: MouseEvent): void
+}>()
 
 // 点击事件处理函数
-const handleClick = (event: MouseEvent) => {
-  emit('click', event);
-};
+const handleClick = (e: MouseEvent) => {
+  emit('click', e)
+}
 </script>
 
 <style scoped>
@@ -160,7 +171,11 @@ const handleClick = (event: MouseEvent) => {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

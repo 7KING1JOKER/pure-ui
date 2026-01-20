@@ -1,15 +1,8 @@
 <template>
-  <Transition 
-    name="message" 
-    appear
-    @after-leave="handleAfterLeave"
-  >
-    <div 
-      v-if="visible" 
-      :class="[
-        'pure-message--container',
-        `pure-message--${type}`
-      ]"
+  <Transition name="message" appear >
+    <div
+      v-if="visible"
+      :class="['pure-message--container', `pure-message--${type}`]"
       :style="{ top: offset + 'px' }"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
@@ -24,27 +17,25 @@
           <span v-else>ℹ️</span>
         </div>
         <div class="pure-message--text">{{ message }}</div>
-        <div v-if="showClose" class="pure-message--close" @click="handleClose">
-          ✕
-        </div>
+        <div v-if="showClose" class="pure-message--close" @click="handleClose">✕</div>
       </div>
     </div>
   </Transition>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue'
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close'])
 
 interface MessageProps {
-  message: string;
-  type?: 'default' | 'primary' | 'success' | 'error' | 'warning' | 'info';
-  duration?: number;
-  offset?: number;
-  showClose?: boolean;
-  visible?: boolean;
-  onClose?: () => void;
+  message: string
+  type?: 'default' | 'primary' | 'success' | 'error' | 'warning' | 'info'
+  duration?: number
+  offset?: number
+  showClose?: boolean
+  visible?: boolean
+  onClose?: () => void
 }
 
 const props = withDefaults(defineProps<MessageProps>(), {
@@ -52,54 +43,55 @@ const props = withDefaults(defineProps<MessageProps>(), {
   duration: 3000,
   offset: 20,
   showClose: false,
-  visible: true
-});
+  visible: true,
+})
 
-const visible = ref(props.visible);
-let timer: number | null = null;
+const visible = ref(props.visible)
+let timer: number | null = null
 
 function startTimer() {
   if (props.duration > 0) {
     timer = window.setTimeout(() => {
-      handleClose();
-    }, props.duration);
+      handleClose()
+    }, props.duration)
   }
 }
 
 function clearTimer() {
   if (timer !== null) {
-    clearTimeout(timer);
-    timer = null;
+    clearTimeout(timer)
+    timer = null
   }
 }
 
 function handleClose() {
-  clearTimer();
+  clearTimer()
+  emit('close')
   if (props.onClose) {
-    props.onClose();
+    props.onClose()
   }
-  visible.value = false;
+  visible.value = false
 }
 
-function handleAfterLeave() {
-  emit('close');
-}
 
 function handleMouseEnter() {
-  clearTimer();
+  clearTimer()
 }
 
 function handleMouseLeave() {
-  startTimer();
+  startTimer()
 }
 
-watch(() => props.visible, (newVal) => {
-  visible.value = newVal;
-});
+watch(
+  () => props.visible,
+  newVal => {
+    visible.value = newVal
+  }
+)
 
 onMounted(() => {
-  startTimer();
-});
+  startTimer()
+})
 </script>
 
 <style scoped>
@@ -217,10 +209,10 @@ onMounted(() => {
 }
 
 .message-enter-active {
-  animation: messageFadeIn var(--transition-slow) cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: messageFadeIn var(--transition-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .message-leave-active {
-  animation: messageFadeOut var(--transition-slow) cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: messageFadeOut var(--transition-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 </style>

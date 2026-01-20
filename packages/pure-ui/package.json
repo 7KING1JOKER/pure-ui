@@ -27,7 +27,11 @@
     "build": "vue-tsc && vite build",
     "build:lib": "vue-tsc && vite build --config vite.config.lib.ts",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts",
+    "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
+    "lint:check": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts",
+    "format:fix": "prettier --write \"src/**/*.{vue,ts,js,css,scss,json}\"",
+    "format:check": "prettier --check \"src/**/*.{vue,ts,js,css,scss,json}\"",
     "type-check": "vue-tsc --noEmit",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -37,15 +41,22 @@
     "vue": "^3.5.18"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@types/node": "^24.2.1",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitest/coverage-v8": "^4.0.17",
     "@vue/test-utils": "^2.0.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-vue": "^9.28.0",
     "jsdom": "22.1.0",
+    "prettier": "^3.3.0",
     "typescript": "~5.8.3",
     "vite": "^7.1.0",
     "vite-plugin-dts": "^3.6.4",
     "vitest": "^4.0.17",
+    "vue-eslint-parser": "^10.2.0",
     "vue-tsc": "^3.0.5"
   }
 }
