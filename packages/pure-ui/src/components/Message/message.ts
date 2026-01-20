@@ -33,7 +33,7 @@ function createMessage(options: MessageOptions) {
     currentOffset = offset;
   } else {
     let pos = messageInstances.length - 1;
-    currentOffset = offset + messageInstances[pos].offset + 30;
+    currentOffset = messageInstances[pos].offset + 50;
   }
 
   const app = createApp(Message, {
@@ -47,6 +47,10 @@ function createMessage(options: MessageOptions) {
       const index = messageInstances.findIndex(m => m.container === container);
       if (index > -1) {
         messageInstances.splice(index, 1);
+      }
+      app.unmount();
+      if (document.body.contains(container)) {
+        document.body.removeChild(container);
       }
     }
   });
@@ -75,5 +79,8 @@ export default {
   },
   info(message: string, options?: Omit<MessageOptions, 'message' | 'type'>) {
     return createMessage({ message, type: 'info', ...options });
+  },
+  clearInstances() {
+    messageInstances.length = 0;
   }
 };

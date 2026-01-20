@@ -75,14 +75,15 @@ function clearTimer() {
 
 function handleClose() {
   clearTimer();
+  emit('close');
+  if (props.onClose) {
+    props.onClose();
+  }
   visible.value = false;
 }
 
 function handleAfterLeave() {
   emit('close');
-  if (props.onClose) {
-    props.onClose();
-  }
 }
 
 function handleMouseEnter() {
