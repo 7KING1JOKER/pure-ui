@@ -77,6 +77,7 @@ const handleClick = (e: MouseEvent) => {
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-button);
 }
 
 .pure-button--default {

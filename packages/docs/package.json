@@ -1,0 +1,27 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "Pure-UI 组件库文档",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "keywords": [
+    "pure-ui",
+    "vue",
+    "components",
+    "docs"
+  ],
+  "author": "Pure-UI Team",
+  "license": "MIT",
+  "packageManager": "pnpm@10.27.0",
+  "devDependencies": {
+    "vitepress": "2.0.0-alpha.16"
+  },
+  "dependencies": {
+    "@pure-ui/core": "file:../pure-ui",
+    "vue": "^3.5.27"
+  }
+}
