@@ -5,7 +5,7 @@
 ## 基本用法
 
 <script setup>
-import { Button } from '@pure-ui/core'
+import { PureButton } from '@pure-ui/core'
 import { ref } from 'vue'
 
 const clickCount = ref(0)
@@ -20,22 +20,22 @@ const handleClick = () => {
 通过 `type` 属性设置按钮类型，支持 `default`、`primary`、`success`、`warning`、`danger`、`info` 六种类型。
 
 <div style="display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;">
-  <Button type="default">Default</Button>
-  <Button type="primary">Primary</Button>
-  <Button type="success">Success</Button>
-  <Button type="warning">Warning</Button>
-  <Button type="danger">Danger</Button>
-  <Button type="info">Info</Button>
+  <pure-button type="default">Default</pure-button>
+  <pure-button type="primary">Primary</pure-button>
+  <pure-button type="success">Success</pure-button>
+  <pure-button type="warning">Warning</pure-button>
+  <pure-button type="danger">Danger</pure-button>
+  <pure-button type="info">Info</pure-button>
 </div>
 
 
 ```vue
-<Button type="default">Default</Button>
-<Button type="primary">Primary</Button>
-<Button type="success">Success</Button>
-<Button type="warning">Warning</Button>
-<Button type="danger">Danger</Button>
-<Button type="info">Info</Button>
+<pure-button type="default">Default</pure-button>
+<pure-button type="primary">Primary</pure-button>
+<pure-button type="success">Success</pure-button>
+<pure-button type="warning">Warning</pure-button>
+<pure-button type="danger">Danger</pure-button>
+<pure-button type="info">Info</pure-button>
 ```
 
 ### 按钮尺寸
@@ -43,15 +43,15 @@ const handleClick = () => {
 通过 `size` 属性设置按钮尺寸，支持 `large`、`medium`、`small` 三种尺寸。
 
 <div style="display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;">
-  <Button type="primary" size="large">Large</Button>
-  <Button type="primary" size="medium">Medium</Button>
-  <Button type="primary" size="small">Small</Button>
+  <pure-button type="primary" size="large">Large</pure-button>
+  <pure-button type="primary" size="medium">Medium</pure-button>
+  <pure-button type="primary" size="small">Small</pure-button>
 </div>
 
 ```vue
-<Button type="primary" size="large">Large</Button>
-<Button type="primary" size="medium">Medium</Button>
-<Button type="primary" size="small">Small</Button>
+<pure-button type="primary" size="large">Large</pure-button>
+<pure-button type="primary" size="medium">Medium</pure-button>
+<pure-button type="primary" size="small">Small</pure-button>
 ```
 
 ### 禁用状态
@@ -59,15 +59,15 @@ const handleClick = () => {
 通过 `disabled` 属性设置按钮禁用状态。
 
 <div style="display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;">
-  <Button type="primary" :disabled="true">Disabled</Button>
-  <Button type="success" :disabled="true">Disabled</Button>
-  <Button type="danger" :disabled="true">Disabled</Button>
+  <pure-button type="primary" :disabled="true">Disabled</pure-button>
+  <pure-button type="success" :disabled="true">Disabled</pure-button>
+  <pure-button type="danger" :disabled="true">Disabled</pure-button>
 </div>
 
 ```vue
-<Button type="primary" :disabled="true">Disabled</Button>
-<Button type="success" :disabled="true">Disabled</Button>
-<Button type="danger" :disabled="true">Disabled</Button>
+<pure-button type="primary" :disabled="true">Disabled</pure-button>
+<pure-button type="success" :disabled="true">Disabled</pure-button>
+<pure-button type="danger" :disabled="true">Disabled</pure-button>
 ```
 
 ### 加载状态
@@ -75,15 +75,15 @@ const handleClick = () => {
 通过 `loading` 属性设置按钮加载状态。
 
 <div style="display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;">
-  <Button type="primary" :loading="true">Loading</Button>
-  <Button type="success" :loading="true">Loading</Button>
-  <Button type="danger" :loading="true">Loading</Button>
+  <pure-button type="primary" :loading="true">Loading</pure-button>
+  <pure-button type="success" :loading="true">Loading</pure-button>
+  <pure-button type="danger" :loading="true">Loading</pure-button>
 </div>
 
 ```vue
-<Button type="primary" :loading="true">Loading</Button>
-<Button type="success" :loading="true">Loading</Button>
-<Button type="danger" :loading="true">Loading</Button>
+<pure-button type="primary" :loading="true">Loading</pure-button>
+<pure-button type="success" :loading="true">Loading</pure-button>
+<pure-button type="danger" :loading="true">Loading</pure-button>
 ```
 
 ### 块级按钮
@@ -91,11 +91,11 @@ const handleClick = () => {
 通过 `block` 属性设置按钮为块级元素，会占满整个父容器宽度。
 
 <div style="width: 300px; margin: 16px 0;">
-  <Button type="primary" :block="true">Block Button</Button>
+  <pure-button type="primary" :block="true">Block Button</pure-button>
 </div>
 
 ```vue
-<Button type="primary" :block="true">Block Button</Button>
+<pure-button type="primary" :block="true">Block Button</pure-button>
 ```
 
 ### 点击事件
@@ -104,7 +104,7 @@ const handleClick = () => {
 
 <div style="margin: 16px 0;">
   <div style="display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;">
-    <Button type="primary" @click="handleClick">Click Me ({{ clickCount }})</Button>
+    <pure-button type="primary" @click="handleClick">Click Me ({{ clickCount }})</pure-button>
   </div>
   <p v-if="clickCount > 0" style="margin-top: 12px;">
     按钮已被点击 {{ clickCount }} 次
@@ -112,7 +112,7 @@ const handleClick = () => {
 </div>
 
 ```vue
-<Button type="primary" @click="handleClick">Click Me</Button>
+<pure-button type="primary" @click="handleClick">Click Me</pure-button>
 
 <script setup>
 const handleClick = () => {
@@ -126,25 +126,25 @@ const handleClick = () => {
 按钮支持自定义内容，如添加图标等。
 
 <div style="display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;">
-  <Button type="primary">
+  <pure-button type="primary">
     <span>🎉</span>
     <span>Custom Content</span>
-  </Button>
-  <Button type="success">
+  </pure-button>
+  <pure-button type="success">
     <span>✅</span>
     <span>Success</span>
-  </Button>
+  </pure-button>
 </div>
 
 ```vue
-<Button type="primary">
+<pure-button type="primary">
   <span>🎉</span>
   <span>Custom Content</span>
-</Button>
-<Button type="success">
+</pure-button>
+<pure-button type="success">
   <span>✅</span>
   <span>Success</span>
-</Button>
+</pure-button>
 ```
 
 ## API

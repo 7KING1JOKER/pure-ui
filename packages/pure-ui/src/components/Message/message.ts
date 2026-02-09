@@ -76,6 +76,15 @@ export default {
   info(message: string, options?: Omit<MessageOptions, 'message' | 'type'>) {
     return createMessage({ message, type: 'info', ...options })
   },
+  closeAll() {
+    // 关闭所有消息实例
+    messageInstances.forEach((instance) => {
+      if (document.body.contains(instance.container)) {
+        document.body.removeChild(instance.container)
+      }
+    })
+    messageInstances.length = 0
+  },
   clearInstances() {
     messageInstances.length = 0
   },

@@ -118,27 +118,27 @@ onMounted(() => {
 }
 
 .pure-message--primary {
-  background-color: #ecf5ff;
+  background-color: var(--color-primary-light);
   color: var(--color-primary);
 }
 
 .pure-message--success {
-  background-color: #f0f9ff;
+  background-color: var(--color-success-light);
   color: var(--color-success);
 }
 
 .pure-message--error {
-  background-color: #fef0f0;
+  background-color: var(--color-danger-light);
   color: var(--color-danger);
 }
 
 .pure-message--warning {
-  background-color: #fdf6ec;
+  background-color: var(--color-warning-light);
   color: var(--color-warning);
 }
 
 .pure-message--info {
-  background-color: #f4f4f5;
+  background-color: var(--color-info-light);
   color: var(--color-info);
 }
 

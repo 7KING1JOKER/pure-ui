@@ -5,53 +5,53 @@
     <section class="demo-section">
       <h2>按钮类型</h2>
       <div class="button-group">
-        <Button type="default">Default</Button>
-        <Button type="primary">Primary</Button>
-        <Button type="success">Success</Button>
-        <Button type="warning">Warning</Button>
-        <Button type="danger">Danger</Button>
-        <Button type="info">Info</Button>
+        <pure-button type="default">Default</pure-button>
+        <pure-button type="primary">Primary</pure-button>
+        <pure-button type="success">Success</pure-button>
+        <pure-button type="warning">Warning</pure-button>
+        <pure-button type="danger">Danger</pure-button>
+        <pure-button type="info">Info</pure-button>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>按钮尺寸</h2>
       <div class="button-group">
-        <Button type="primary" size="large">Large</Button>
-        <Button type="primary" size="medium">Medium</Button>
-        <Button type="primary" size="small">Small</Button>
+        <pure-button type="primary" size="large">Large</pure-button>
+        <pure-button type="primary" size="medium">Medium</pure-button>
+        <pure-button type="primary" size="small">Small</pure-button>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>禁用状态</h2>
       <div class="button-group">
-        <Button type="primary" :disabled="true">Disabled</Button>
-        <Button type="success" :disabled="true">Disabled</Button>
-        <Button type="danger" :disabled="true">Disabled</Button>
+        <pure-button type="primary" :disabled="true">Disabled</pure-button>
+        <pure-button type="success" :disabled="true">Disabled</pure-button>
+        <pure-button type="danger" :disabled="true">Disabled</pure-button>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>加载状态</h2>
       <div class="button-group">
-        <Button type="primary" :loading="true">Loading</Button>
-        <Button type="success" :loading="true">Loading</Button>
-        <Button type="danger" :loading="true">Loading</Button>
+        <pure-button type="primary" :loading="true">Loading</pure-button>
+        <pure-button type="success" :loading="true">Loading</pure-button>
+        <pure-button type="danger" :loading="true">Loading</pure-button>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>块级按钮</h2>
       <div class="button-group">
-        <Button type="primary" :block="true">Block Button</Button>
+        <pure-button type="primary" :block="true">Block Button</pure-button>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>点击事件</h2>
       <div class="button-group">
-        <Button type="primary" @click="handleClick">Click Me</Button>
+        <pure-button type="primary" @click="handleClick">Click Me</pure-button>
       </div>
       <p v-if="clickCount > 0" class="click-info">
         按钮被点击了 {{ clickCount }} 次
@@ -61,14 +61,14 @@
     <section class="demo-section">
       <h2>自定义内容</h2>
       <div class="button-group">
-        <Button type="primary">
+        <pure-button type="primary">
           <span>🎉</span>
           <span>Custom Content</span>
-        </Button>
-        <Button type="success">
+        </pure-button>
+        <pure-button type="success">
           <span>✅</span>
           <span>Success</span>
-        </Button>
+        </pure-button>
       </div>
     </section>
 
@@ -76,7 +76,7 @@
     <section class="demo-section">
       <h2>Card - 垂直布局（col）</h2>
       <div class="card-group">
-        <Card type="col" :shadow="true" :bordered="true">
+        <pure-card type="col" :shadow="true" :bordered="true">
           <template #header>
             <h3>卡片标题</h3>
           </template>
@@ -84,25 +84,25 @@
             <p>这是卡片的主要内容区域。可以放置任何内容，包括文本、图片、表单等。</p>
           </template>
           <template #footer>
-            <Button type="primary" size="small">操作</Button>
+            <pure-button type="primary" size="small">操作</pure-button>
           </template>
-        </Card>
+        </pure-card>
 
-        <Card type="col" :shadow="false" :bordered="true">
+        <pure-card type="col" :shadow="false" :bordered="true">
           <template #header>
             <h3>无边框卡片</h3>
           </template>
           <template #default>
             <p>这个卡片没有阴影效果，但有边框。</p>
           </template>
-        </Card>
+        </pure-card>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>Card - 水平布局（row）</h2>
       <div class="card-group">
-        <Card type="row" :shadow="true" :bordered="true">
+        <pure-card type="row" :shadow="true" :bordered="true">
           <template #left>
             <div class="card-left-content">
               <h4>左侧</h4>
@@ -122,9 +122,9 @@
               <p>侧边栏内容</p>
             </div>
           </template>
-        </Card>
+        </pure-card>
 
-        <Card type="row" :shadow="true" :bordered="false">
+        <pure-card type="row" :shadow="true" :bordered="false">
           <template #left>
             <div class="card-left-content">
               <h4>无框左侧</h4>
@@ -141,70 +141,70 @@
               <h4>无框右侧</h4>
             </div>
           </template>
-        </Card>
+        </pure-card>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>Card - 样式组合</h2>
       <div class="card-group">
-        <Card type="col" :shadow="true" :bordered="true">
+        <pure-card type="col" :shadow="true" :bordered="true">
           <template #header>
             <h3>阴影 + 边框</h3>
           </template>
           <template #default>
             <p>同时显示阴影和边框的卡片。</p>
           </template>
-        </Card>
+        </pure-card>
 
-        <Card type="col" :shadow="false" :bordered="false">
+        <pure-card type="col" :shadow="false" :bordered="false">
           <template #header>
             <h3>无阴影 + 无边框</h3>
           </template>
           <template #default>
             <p>简洁的卡片样式，没有阴影和边框。</p>
           </template>
-        </Card>
+        </pure-card>
 
-        <Card type="col" :shadow="true" :bordered="false">
+        <pure-card type="col" :shadow="true" :bordered="false">
           <template #header>
             <h3>仅阴影</h3>
           </template>
           <template #default>
             <p>只有阴影效果的卡片。</p>
           </template>
-        </Card>
+        </pure-card>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>Card - 可选插槽（垂直布局）</h2>
       <div class="card-group">
-        <Card type="col" :shadow="true" :bordered="true">
+        <pure-card type="col" :shadow="true" :bordered="true">
           <template #header>
             <h3>只有 Header</h3>
           </template>
           <template #default>
             <p>这个卡片只有 header 和 body，没有 footer。</p>
           </template>
-        </Card>
+        </pure-card>
 
-        <Card type="col" :shadow="true" :bordered="true">
+        <pure-card type="col" :shadow="true" :bordered="true">
           <template #default>
             <p>这个卡片只有 body，没有 header 和 footer。</p>
           </template>
-        </Card>
+        </pure-card>
 
-        <Card type="col" :shadow="true" :bordered="true">
+        <pure-card type="col" :shadow="true" :bordered="true">
           <template #default>
             <p>这个卡片只有 body 和 footer，没有 header。</p>
           </template>
           <template #footer>
-            <Button type="primary" size="small">确认</Button>
+            <pure-button type="primary" size="small">确认</pure-button>
           </template>
-        </Card>
+        </pure-card>
 
-        <Card type="col" :shadow="true" :bordered="true">
+        <pure-card type="col" :shadow="true" :bordered="true">
           <template #header>
             <h3>完整卡片</h3>
           </template>
@@ -212,25 +212,25 @@
             <p>这个卡片包含 header、body 和 footer 三个部分。</p>
           </template>
           <template #footer>
-            <Button type="primary" size="small">操作</Button>
+            <pure-button type="primary" size="small">操作</pure-button>
           </template>
-        </Card>
+        </pure-card>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>Card - 可选插槽（水平布局）</h2>
       <div class="card-group">
-        <Card type="row" :shadow="true" :bordered="true">
+        <pure-card type="row" :shadow="true" :bordered="true">
           <template #default>
             <div class="card-main-content">
               <h4>只有 Body</h4>
               <p>这个卡片只有 body，没有 left 和 right。</p>
             </div>
           </template>
-        </Card>
+        </pure-card>
 
-        <Card type="row" :shadow="true" :bordered="true">
+        <pure-card type="row" :shadow="true" :bordered="true">
           <template #left>
             <div class="card-left-content">
               <h4>左侧栏</h4>
@@ -243,9 +243,9 @@
               <p>这个卡片有 left 和 body，没有 right。</p>
             </div>
           </template>
-        </Card>
+        </pure-card>
 
-        <Card type="row" :shadow="true" :bordered="true">
+        <pure-card type="row" :shadow="true" :bordered="true">
           <template #default>
             <div class="card-main-content">
               <h4>Body + Right</h4>
@@ -258,9 +258,9 @@
               <p>侧边栏内容</p>
             </div>
           </template>
-        </Card>
+        </pure-card>
 
-        <Card type="row" :shadow="true" :bordered="true">
+        <pure-card type="row" :shadow="true" :bordered="true">
           <template #left>
             <div class="card-left-content">
               <h4>完整左侧</h4>
@@ -279,21 +279,21 @@
               <p>侧边栏内容</p>
             </div>
           </template>
-        </Card>
+        </pure-card>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>Card - 鼠标悬停效果</h2>
       <div class="card-group">
-        <Card type="col" :shadow="true" :bordered="true" :hovered="true">
+        <pure-card type="col" :shadow="true" :bordered="true" :hovered="true">
           <template #header>
             <h3>悬停卡片</h3>
           </template>
           <template #default>
             <p>鼠标悬停时会有轻微的.translateY(-2px)效果。</p>
           </template>
-        </Card>
+        </pure-card>
       </div>
     </section>
 
@@ -301,12 +301,12 @@
     <section class="demo-section">
       <h2>Message - 消息提示</h2>
       <div class="message-group">
-        <Button type="default" @click="showMessage('default')">默认消息</Button>
-        <Button type="primary" @click="showMessage('primary')">主要消息</Button>
-        <Button type="success" @click="showMessage('success')">成功消息</Button>
-        <Button type="danger" @click="showMessage('error')">错误消息</Button>
-        <Button type="warning" @click="showMessage('warning')">警告消息</Button>
-        <Button type="info" @click="showMessage('info')">信息消息</Button>
+        <pure-button type="default" @click="showMessage('default')">默认消息</pure-button>
+        <pure-button type="primary" @click="showMessage('primary')">主要消息</pure-button>
+        <pure-button type="success" @click="showMessage('success')">成功消息</pure-button>
+        <pure-button type="danger" @click="showMessage('error')">错误消息</pure-button>
+        <pure-button type="warning" @click="showMessage('warning')">警告消息</pure-button>
+        <pure-button type="info" @click="showMessage('info')">信息消息</pure-button>
       </div>
       <p class="message-info">
         点击按钮显示不同类型的消息提示，鼠标悬停时停止计时器，移开后继续计时。
@@ -317,7 +317,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Button, Card, message } from '@pure-ui/core';
+import { PureButton, PureCard, pureMessage } from '@pure-ui/core';
 
 const clickCount = ref(0);
 
@@ -339,7 +339,7 @@ const showMessage = (type: 'default' | 'primary' | 'success' | 'error' | 'warnin
   const messageText = messages[type];
   
   // 动态访问 message 组件方法
-  message[type](messageText, {
+  pureMessage[type](messageText, {
     duration: 3000,
     offset: 20,
     showClose: true

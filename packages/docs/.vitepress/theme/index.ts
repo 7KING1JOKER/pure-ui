@@ -1,12 +1,14 @@
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { Button } from '@pure-ui/core'
+import { PureButton, PureCard } from '@pure-ui/core'
+// 先导入组件库样式
 import '@pure-ui/dist/core.css'
 
 const theme: Theme = {
   ...DefaultTheme,
   enhanceApp({ app }) {
-    app.component('Button', Button)
+    app.component('PureButton', PureButton)
+    app.component('PureCard', PureCard)
   }
 }
 

@@ -16,27 +16,42 @@ export default defineConfig({
         link: '/components/button'
       }
     ],
-    sidebar: {
-      '/components/': [
-        {
-          text: '基础组件',
-          items: [
-            {
-              text: 'Button 按钮',
-              link: '/components/button'
-            },
-            {
-              text: 'Card 卡片',
-              link: '/components/card'
-            },
-            {
-              text: 'Message 消息',
-              link: '/components/message'
-            }
-          ]
-        }
-      ]
-    },
+    sidebar: [
+      {
+        text: 'Basic 基础组件',
+        items: [
+          {
+            text: 'Button 按钮',
+            link: '/components/button'
+          },
+          {
+            text: 'Card 卡片',
+            link: '/components/card'
+          },
+          {
+            text: 'Message 消息',
+            link: '/components/message'
+          }
+        ]
+      },
+      {
+        text: 'Navigation 导航',
+        items: [
+          {
+            text: 'Menu 菜单',
+            link: '/navigations/menu'
+          },
+          {
+            text: 'Pagination 分页',
+            link: '/navigations/pagination'
+          },
+          {
+            text: 'Breadcrumb 面包屑',
+            link: '/navigations/breadcrumb'
+          }
+        ]
+      }
+    ],
     socialLinks: [
       {
         icon: 'github',

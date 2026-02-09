@@ -52,6 +52,11 @@ withDefaults(defineProps<ButtonProps>(), {
   block: false,
 })
 
+// Button 组件选项配置
+defineOptions({
+  name: 'pure-button',
+})
+
 // Button 组件事件定义
 const emit = defineEmits<{
   (_e: 'click', _event: MouseEvent): void
@@ -100,7 +105,7 @@ const handleClick = (e: MouseEvent) => {
 
 .pure-button--success {
   background-color: var(--color-success);
-  color: rgba(0, 0, 0, 0.4);
+  color: var(--color-white);
 }
 
 .pure-button--success:hover {

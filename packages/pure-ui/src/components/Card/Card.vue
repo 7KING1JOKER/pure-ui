@@ -76,7 +76,7 @@ withDefaults(defineProps<CardProps>(), {
   border-bottom: 1px solid var(--color-border-light);
   font-size: var(--font-size-large);
   font-weight: 600;
-  color: #303133;
+  color: var(--color-black);
   background-color: var(--color-bg-secondary);
 }
 
