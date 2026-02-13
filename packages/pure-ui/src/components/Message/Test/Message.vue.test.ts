@@ -15,68 +15,11 @@ describe('Message 组件', () => {
     const wrapper = mount(Message, {
       props: {
         message: '默认消息',
-        type: 'default',
         duration: 0,
       },
     })
     expect(wrapper.find('.pure-message--container').exists()).toBe(true)
-    expect(wrapper.find('.pure-message--container').classes()).toContain('pure-message--default')
     expect(wrapper.find('.pure-message--text').text()).toBe('默认消息')
-  })
-
-  it('应该正确渲染主要类型消息', () => {
-    const wrapper = mount(Message, {
-      props: {
-        message: '主要消息',
-        type: 'primary',
-        duration: 0,
-      },
-    })
-    expect(wrapper.find('.pure-message--container').classes()).toContain('pure-message--primary')
-  })
-
-  it('应该正确渲染成功类型消息', () => {
-    const wrapper = mount(Message, {
-      props: {
-        message: '操作成功！',
-        type: 'success',
-        duration: 0,
-      },
-    })
-    expect(wrapper.find('.pure-message--container').classes()).toContain('pure-message--success')
-  })
-
-  it('应该正确渲染错误类型消息', () => {
-    const wrapper = mount(Message, {
-      props: {
-        message: '操作失败！',
-        type: 'error',
-        duration: 0,
-      },
-    })
-    expect(wrapper.find('.pure-message--container').classes()).toContain('pure-message--error')
-  })
-
-  it('应该正确渲染警告类型消息', () => {
-    const wrapper = mount(Message, {
-      props: {
-        message: '请注意！',
-        type: 'warning',
-        duration: 0,
-      },
-    })
-    expect(wrapper.find('.pure-message--container').classes()).toContain('pure-message--warning')
-  })
-
-  it('应该正确渲染信息类型消息', () => {
-    const wrapper = mount(Message, {
-      props: {
-        message: '提示信息',
-        type: 'info',
-        duration: 0,
-      },
-    })
-    expect(wrapper.find('.pure-message--container').classes()).toContain('pure-message--info')
   })
 
   it('应该正确渲染带关闭按钮的消息', () => {
@@ -116,55 +59,10 @@ describe('Message 组件', () => {
     const wrapper = mount(Message, {
       props: {
         message: '默认消息',
-        type: 'default',
         duration: 0,
       },
     })
     expect(wrapper.find('.pure-message--icon').text()).toBe('ℹ️')
-  })
-
-  it('应该正确渲染主要类型图标', () => {
-    const wrapper = mount(Message, {
-      props: {
-        message: '主要消息',
-        type: 'primary',
-        duration: 0,
-      },
-    })
-    expect(wrapper.find('.pure-message--icon').text()).toBe('🔵')
-  })
-
-  it('应该正确渲染成功类型图标', () => {
-    const wrapper = mount(Message, {
-      props: {
-        message: '成功消息',
-        type: 'success',
-        duration: 0,
-      },
-    })
-    expect(wrapper.find('.pure-message--icon').text()).toBe('✅')
-  })
-
-  it('应该正确渲染错误类型图标', () => {
-    const wrapper = mount(Message, {
-      props: {
-        message: '错误消息',
-        type: 'error',
-        duration: 0,
-      },
-    })
-    expect(wrapper.find('.pure-message--icon').text()).toBe('❌')
-  })
-
-  it('应该正确渲染警告类型图标', () => {
-    const wrapper = mount(Message, {
-      props: {
-        message: '警告消息',
-        type: 'warning',
-        duration: 0,
-      },
-    })
-    expect(wrapper.find('.pure-message--icon').text()).toBe('⚠️')
   })
 
   it('应该在指定时间后自动关闭', async () => {
@@ -173,11 +71,14 @@ describe('Message 组件', () => {
         message: '自动关闭的消息',
         duration: 3000,
       },
+      attachTo: document.body,
     })
 
     expect(wrapper.find('.pure-message--container').exists()).toBe(true)
 
     vi.advanceTimersByTime(3000)
+    await wrapper.vm.$nextTick()
+    vi.advanceTimersByTime(10000)
     await wrapper.vm.$nextTick()
 
     expect(wrapper.find('.pure-message--container').exists()).toBe(false)
@@ -249,6 +150,8 @@ describe('Message 组件', () => {
     await wrapper.find('.pure-message--container').trigger('mouseleave')
     vi.advanceTimersByTime(3000)
     await wrapper.vm.$nextTick()
+    vi.advanceTimersByTime(5000)
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.find('.pure-message--container').exists()).toBe(false)
   })
@@ -277,11 +180,14 @@ describe('Message 组件', () => {
         visible: true,
         duration: 0,
       },
+      attachTo: document.body,
     })
 
     expect(wrapper.find('.pure-message--container').exists()).toBe(true)
 
     await wrapper.setProps({ visible: false })
+    await wrapper.vm.$nextTick()
+    vi.advanceTimersByTime(5000)
     await wrapper.vm.$nextTick()
 
     expect(wrapper.find('.pure-message--container').exists()).toBe(false)

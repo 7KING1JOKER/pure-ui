@@ -5,53 +5,53 @@
     <section class="demo-section">
       <h2>按钮类型</h2>
       <div class="button-group">
-        <pure-button type="default">Default</pure-button>
-        <pure-button type="primary">Primary</pure-button>
-        <pure-button type="success">Success</pure-button>
-        <pure-button type="warning">Warning</pure-button>
-        <pure-button type="danger">Danger</pure-button>
-        <pure-button type="info">Info</pure-button>
+        <pure-button>Default</pure-button>
+        <pure-button>Primary</pure-button>
+        <pure-button>Success</pure-button>
+        <pure-button>Warning</pure-button>
+        <pure-button>Danger</pure-button>
+        <pure-button>Info</pure-button>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>按钮尺寸</h2>
       <div class="button-group">
-        <pure-button type="primary" size="large">Large</pure-button>
-        <pure-button type="primary" size="medium">Medium</pure-button>
-        <pure-button type="primary" size="small">Small</pure-button>
+        <pure-button size="large">Large</pure-button>
+        <pure-button size="medium">Medium</pure-button>
+        <pure-button size="small">Small</pure-button>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>禁用状态</h2>
       <div class="button-group">
-        <pure-button type="primary" :disabled="true">Disabled</pure-button>
-        <pure-button type="success" :disabled="true">Disabled</pure-button>
-        <pure-button type="danger" :disabled="true">Disabled</pure-button>
+        <pure-button :disabled="true">Disabled</pure-button>
+        <pure-button :disabled="true">Disabled</pure-button>
+        <pure-button :disabled="true">Disabled</pure-button>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>加载状态</h2>
       <div class="button-group">
-        <pure-button type="primary" :loading="true">Loading</pure-button>
-        <pure-button type="success" :loading="true">Loading</pure-button>
-        <pure-button type="danger" :loading="true">Loading</pure-button>
+        <pure-button :loading="true">Loading</pure-button>
+        <pure-button :loading="true">Loading</pure-button>
+        <pure-button :loading="true">Loading</pure-button>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>块级按钮</h2>
       <div class="button-group">
-        <pure-button type="primary" :block="true">Block Button</pure-button>
+        <pure-button :block="true">Block Button</pure-button>
       </div>
     </section>
 
     <section class="demo-section">
       <h2>点击事件</h2>
       <div class="button-group">
-        <pure-button type="primary" @click="handleClick">Click Me</pure-button>
+        <pure-button @click="handleClick">Click Me</pure-button>
       </div>
       <p v-if="clickCount > 0" class="click-info">
         按钮被点击了 {{ clickCount }} 次
@@ -61,11 +61,11 @@
     <section class="demo-section">
       <h2>自定义内容</h2>
       <div class="button-group">
-        <pure-button type="primary">
+        <pure-button>
           <span>🎉</span>
           <span>Custom Content</span>
         </pure-button>
-        <pure-button type="success">
+        <pure-button>
           <span>✅</span>
           <span>Success</span>
         </pure-button>
@@ -84,7 +84,7 @@
             <p>这是卡片的主要内容区域。可以放置任何内容，包括文本、图片、表单等。</p>
           </template>
           <template #footer>
-            <pure-button type="primary" size="small">操作</pure-button>
+            <h3>底部内容</h3>
           </template>
         </pure-card>
 
@@ -200,7 +200,7 @@
             <p>这个卡片只有 body 和 footer，没有 header。</p>
           </template>
           <template #footer>
-            <pure-button type="primary" size="small">确认</pure-button>
+            <h3>footer</h3>
           </template>
         </pure-card>
 
@@ -212,7 +212,7 @@
             <p>这个卡片包含 header、body 和 footer 三个部分。</p>
           </template>
           <template #footer>
-            <pure-button type="primary" size="small">操作</pure-button>
+            <h3>底部内容</h3>
           </template>
         </pure-card>
       </div>
@@ -301,12 +301,12 @@
     <section class="demo-section">
       <h2>Message - 消息提示</h2>
       <div class="message-group">
-        <pure-button type="default" @click="showMessage('default')">默认消息</pure-button>
-        <pure-button type="primary" @click="showMessage('primary')">主要消息</pure-button>
-        <pure-button type="success" @click="showMessage('success')">成功消息</pure-button>
-        <pure-button type="danger" @click="showMessage('error')">错误消息</pure-button>
-        <pure-button type="warning" @click="showMessage('warning')">警告消息</pure-button>
-        <pure-button type="info" @click="showMessage('info')">信息消息</pure-button>
+        <pure-button @click="showMessage('default')">默认消息</pure-button>
+        <pure-button @click="showMessage('primary')">主要消息</pure-button>
+        <pure-button @click="showMessage('success')">成功消息</pure-button>
+        <pure-button @click="showMessage('error')">错误消息</pure-button>
+        <pure-button @click="showMessage('warning')">警告消息</pure-button>
+        <pure-button @click="showMessage('info')">信息消息</pure-button>
       </div>
       <p class="message-info">
         点击按钮显示不同类型的消息提示，鼠标悬停时停止计时器，移开后继续计时。
@@ -338,8 +338,7 @@ const showMessage = (type: 'default' | 'primary' | 'success' | 'error' | 'warnin
   
   const messageText = messages[type];
   
-  // 动态访问 message 组件方法
-  pureMessage[type](messageText, {
+  pureMessage.default(messageText, {
     duration: 3000,
     offset: 20,
     showClose: true

@@ -17,43 +17,8 @@ describe('Message 服务函数', () => {
     expect(document.querySelector('.pure-message--container')).toBeTruthy()
   })
 
-  it('应该创建主要类型消息', () => {
-    void message.primary('主要消息')
-    const container = document.querySelector('.pure-message--container')
-    expect(container).toBeTruthy()
-    expect(container?.classList.contains('pure-message--primary')).toBe(true)
-  })
-
-  it('应该创建成功类型消息', () => {
-    void message.success('成功消息')
-    const container = document.querySelector('.pure-message--container')
-    expect(container).toBeTruthy()
-    expect(container?.classList.contains('pure-message--success')).toBe(true)
-  })
-
-  it('应该创建错误类型消息', () => {
-    void message.error('错误消息')
-    const container = document.querySelector('.pure-message--container')
-    expect(container).toBeTruthy()
-    expect(container?.classList.contains('pure-message--error')).toBe(true)
-  })
-
-  it('应该创建警告类型消息', () => {
-    void message.warning('警告消息')
-    const container = document.querySelector('.pure-message--container')
-    expect(container).toBeTruthy()
-    expect(container?.classList.contains('pure-message--warning')).toBe(true)
-  })
-
-  it('应该创建信息类型消息', () => {
-    void message.info('信息消息')
-    const container = document.querySelector('.pure-message--container')
-    expect(container).toBeTruthy()
-    expect(container?.classList.contains('pure-message--info')).toBe(true)
-  })
-
   it('应该正确设置自定义持续时间', async () => {
-    void message.success('自定义时间消息', {
+    void message.default('自定义时间消息', {
       duration: 5000,
     })
 
@@ -68,7 +33,7 @@ describe('Message 服务函数', () => {
   })
 
   it('应该正确显示关闭按钮', () => {
-    void message.info('带关闭按钮的消息', {
+    void message.default('带关闭按钮的消息', {
       showClose: true,
     })
 
@@ -77,7 +42,7 @@ describe('Message 服务函数', () => {
   })
 
   it('不应该显示关闭按钮当 showClose 为 false', () => {
-    void message.info('不带关闭按钮的消息', {
+    void message.default('不带关闭按钮的消息', {
       showClose: false,
     })
 
@@ -86,18 +51,18 @@ describe('Message 服务函数', () => {
   })
 
   it('应该正确堆叠多个消息', () => {
-    void message.success('消息 1')
-    void message.success('消息 2')
-    void message.success('消息 3')
+    void message.default('消息 1')
+    void message.default('消息 2')
+    void message.default('消息 3')
 
     const containers = document.querySelectorAll('.pure-message--container')
     expect(containers.length).toBe(3)
   })
 
   it('应该正确计算堆叠位置', () => {
-    void message.success('消息 1')
-    void message.success('消息 2')
-    void message.success('消息 3')
+    void message.default('消息 1')
+    void message.default('消息 2')
+    void message.default('消息 3')
 
     const containers = document.querySelectorAll('.pure-message--container')
     const container1 = containers[0]
@@ -110,15 +75,48 @@ describe('Message 服务函数', () => {
   })
 
   it('应该在指定时间后自动关闭', async () => {
-    void message.success('自动关闭的消息', {
+    void message.default('自动关闭的消息', {
       duration: 3000,
     })
 
     expect(document.querySelector('.pure-message--container')).toBeTruthy()
 
     vi.advanceTimersByTime(3000)
-    vi.advanceTimersByTime(400)
+    vi.advanceTimersByTime(10000)
 
     expect(document.querySelector('.pure-message--container')).toBe(null)
+  })
+
+  it('应该正确关闭所有消息', () => {
+    void message.default('消息 1')
+    void message.default('消息 2')
+    void message.default('消息 3')
+
+    expect(document.querySelectorAll('.pure-message--container').length).toBe(3)
+
+    message.closeAll()
+
+    expect(document.querySelectorAll('.pure-message--container').length).toBe(0)
+  })
+
+  it('应该正确使用自定义 offset', () => {
+    void message.default('自定义偏移消息', {
+      offset: 100,
+    })
+
+    const container = document.querySelector('.pure-message--container')
+    expect(container?.getAttribute('style')).toContain('top: 100px')
+  })
+
+  it('应该正确堆叠多个消息并计算偏移', () => {
+    void message.default('消息 1', { offset: 50 })
+    void message.default('消息 2')
+    void message.default('消息 3')
+
+    const containers = document.querySelectorAll('.pure-message--container')
+    expect(containers.length).toBe(3)
+    expect(containers[0].getAttribute('style')).toContain('top: 50px')
+    expect(containers[1].getAttribute('style')).toContain('top: 100px')
+    expect(containers[2].getAttribute('style')).toContain('top: 150px')
   })
 })

@@ -4,44 +4,8 @@ import Button from '../Button.vue'
 
 describe('Button 组件', () => {
   it('应该正确渲染默认按钮', () => {
-    const wrapper = mount(Button)
+    const wrapper = mount(Button) 
     expect(wrapper.classes()).toContain('pure-button')
-    expect(wrapper.classes()).toContain('pure-button--default')
-  })
-
-  it('应该正确渲染主要类型按钮', () => {
-    const wrapper = mount(Button, {
-      props: { type: 'primary' },
-    })
-    expect(wrapper.classes()).toContain('pure-button--primary')
-  })
-
-  it('应该正确渲染成功类型按钮', () => {
-    const wrapper = mount(Button, {
-      props: { type: 'success' },
-    })
-    expect(wrapper.classes()).toContain('pure-button--success')
-  })
-
-  it('应该正确渲染警告类型按钮', () => {
-    const wrapper = mount(Button, {
-      props: { type: 'warning' },
-    })
-    expect(wrapper.classes()).toContain('pure-button--warning')
-  })
-
-  it('应该正确渲染危险类型按钮', () => {
-    const wrapper = mount(Button, {
-      props: { type: 'danger' },
-    })
-    expect(wrapper.classes()).toContain('pure-button--danger')
-  })
-
-  it('应该正确渲染信息类型按钮', () => {
-    const wrapper = mount(Button, {
-      props: { type: 'info' },
-    })
-    expect(wrapper.classes()).toContain('pure-button--info')
   })
 
   it('应该正确渲染大尺寸按钮', () => {
@@ -127,5 +91,77 @@ describe('Button 组件', () => {
     })
     expect(wrapper.html()).toContain('🎉')
     expect(wrapper.html()).toContain('图标按钮')
+  })
+
+  it('应该创建波纹效果', async () => {
+    const wrapper = mount(Button, {
+      attachTo: document.body,
+    })
+    
+    const button = wrapper.find('button')
+    await button.trigger('mousedown', {
+      pageX: 100,
+      pageY: 100,
+    })
+    
+    const ripples = wrapper.find('.ripples')
+    expect(ripples.exists()).toBe(true)
+    expect(ripples.find('.pure-button__ripple').exists()).toBe(true)
+  })
+
+  it('禁用状态下不应该创建波纹效果', async () => {
+    const wrapper = mount(Button, {
+      props: { disabled: true },
+      attachTo: document.body,
+    })
+    
+    const button = wrapper.find('button')
+    await button.trigger('mousedown', {
+      pageX: 100,
+      pageY: 100,
+    })
+    
+    const ripples = wrapper.find('.ripples')
+    expect(ripples.exists()).toBe(true)
+    expect(ripples.find('.pure-button__ripple').exists()).toBe(false)
+  })
+
+  it('加载状态下不应该创建波纹效果', async () => {
+    const wrapper = mount(Button, {
+      props: { loading: true },
+      attachTo: document.body,
+    })
+    
+    const button = wrapper.find('button')
+    await button.trigger('mousedown', {
+      pageX: 100,
+      pageY: 100,
+    })
+    
+    const ripples = wrapper.find('.ripples')
+    expect(ripples.exists()).toBe(true)
+    expect(ripples.find('.pure-button__ripple').exists()).toBe(false)
+  })
+
+  it('波纹效果应该在动画结束后移除', async () => {
+    const wrapper = mount(Button, {
+      attachTo: document.body,
+    })
+    
+    const button = wrapper.find('button')
+    await button.trigger('mousedown', {
+      pageX: 100,
+      pageY: 100,
+    })
+    
+    const ripple = wrapper.find('.pure-button__ripple')
+    expect(ripple.exists()).toBe(true)
+    
+    const animationEndEvent = document.createEvent('Event')
+    animationEndEvent.initEvent('animationend', true, true)
+    ripple.element.dispatchEvent(animationEndEvent)
+    
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('.pure-button__ripple').exists()).toBe(false)
   })
 })

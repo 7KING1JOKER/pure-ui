@@ -1,23 +1,14 @@
 # Message 消息
 
-Message 组件用于显示全局的通知消息，支持多种类型和自定义配置。
+Message 组件用于显示全局的通知消息，支持自定义配置。
 
 ## 基本用法
 
 <script setup>
 import { pureMessage, PureButton } from '@pure-ui/core'
 
-const showMessage = (type) => {
-  const messages = {
-    default: '默认消息',
-    primary: '主要消息',
-    success: '操作成功！',
-    error: '操作失败！',
-    warning: '请注意！',
-    info: '提示信息'
-  }
-  
-  pureMessage[type](messages[type], {
+const showMessage = () => {
+  pureMessage.default('这是一条消息', {
     duration: 3000,
     offset: 20,
     showClose: true
@@ -25,45 +16,26 @@ const showMessage = (type) => {
 }
 </script>
 
-### 消息类型
+### 基本消息
 
-Message 组件提供了多种消息类型，包括默认、主要、成功、错误、警告和信息。
+Message 组件通过函数式 API 调用。
 
 <div style="display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;">
-  <pure-button type="default" @click="showMessage('default')">默认消息</pure-button>
-  <pure-button type="primary" @click="showMessage('primary')">主要消息</pure-button>
-  <pure-button type="success" @click="showMessage('success')">成功消息</pure-button>
-  <pure-button type="danger" @click="showMessage('error')">错误消息</pure-button>
-  <pure-button type="warning" @click="showMessage('warning')">警告消息</pure-button>
-  <pure-button type="info" @click="showMessage('info')">信息消息</pure-button>
+  <pure-button @click="showMessage">显示消息</pure-button>
 </div>
 
 ```vue
 <template>
   <div class="message-group">
-    <pure-button type="default" @click="showMessage('default')">默认消息</pure-button>
-    <pure-button type="primary" @click="showMessage('primary')">主要消息</pure-button>
-    <pure-button type="success" @click="showMessage('success')">成功消息</pure-button>
-    <pure-button type="danger" @click="showMessage('error')">错误消息</pure-button>
-    <pure-button type="warning" @click="showMessage('warning')">警告消息</pure-button>
-    <pure-button type="info" @click="showMessage('info')">信息消息</pure-button>
+    <pure-button @click="showMessage">显示消息</pure-button>
   </div>
 </template>
 
 <script setup>
 import { pureMessage } from '@pure-ui/core'
 
-const showMessage = (type) => {
-  const messages = {
-    default: '默认消息',
-    primary: '主要消息',
-    success: '操作成功！',
-    error: '操作失败！',
-    warning: '请注意！',
-    info: '提示信息'
-  }
-  
-  pureMessage[type](messages[type], {
+const showMessage = () => {
+  pureMessage.default('这是一条消息', {
     duration: 3000,
     offset: 20,
     showClose: true
@@ -76,12 +48,7 @@ const showMessage = (type) => {
 
 Message 组件主要通过函数式 API 调用，支持以下方法：
 
-- `pureMessage.default(message, options)`：显示默认消息
-- `pureMessage.primary(message, options)`：显示主要消息
-- `pureMessage.success(message, options)`：显示成功消息
-- `pureMessage.error(message, options)`：显示错误消息
-- `pureMessage.warning(message, options)`：显示警告消息
-- `pureMessage.info(message, options)`：显示信息消息
+- `pureMessage.default(message, options)`：显示消息
 
 ### 配置选项
 
@@ -96,7 +63,7 @@ Message 组件主要通过函数式 API 调用，支持以下方法：
 #### 带关闭按钮的消息
 
 ```javascript
-pureMessage.success('操作成功！', {
+pureMessage.default('操作成功！', {
   showClose: true
 })
 ```
@@ -104,7 +71,7 @@ pureMessage.success('操作成功！', {
 #### 自定义显示时长
 
 ```javascript
-pureMessage.error('操作失败！', {
+pureMessage.default('操作失败！', {
   duration: 5000 // 显示 5 秒
 })
 ```
@@ -112,7 +79,7 @@ pureMessage.error('操作失败！', {
 #### 自定义偏移量
 
 ```javascript
-pureMessage.warning('请注意！', {
+pureMessage.default('请注意！', {
   offset: 40 // 距离顶部 40px
 })
 ```
@@ -120,7 +87,7 @@ pureMessage.warning('请注意！', {
 #### 不自动关闭的消息
 
 ```javascript
-pureMessage.info('提示信息', {
+pureMessage.default('提示信息', {
   duration: 0 // 不会自动关闭
 })
 ```
@@ -131,12 +98,7 @@ pureMessage.info('提示信息', {
 
 | 方法 | 说明 | 参数 | 返回值 |
 | --- | --- | --- | --- |
-| `pureMessage.default(message, options)` | 显示默认消息 | `message: string`：消息内容<br>`options: Omit<MessageOptions, 'message' | 'type'>`：配置选项 | `MessageInstance`：消息实例 |
-| `pureMessage.primary(message, options)` | 显示主要消息 | `message: string`：消息内容<br>`options: Omit<MessageOptions, 'message' | 'type'>`：配置选项 | `MessageInstance`：消息实例 |
-| `pureMessage.success(message, options)` | 显示成功消息 | `message: string`：消息内容<br>`options: Omit<MessageOptions, 'message' | 'type'>`：配置选项 | `MessageInstance`：消息实例 |
-| `pureMessage.error(message, options)` | 显示错误消息 | `message: string`：消息内容<br>`options: Omit<MessageOptions, 'message' | 'type'>`：配置选项 | `MessageInstance`：消息实例 |
-| `pureMessage.warning(message, options)` | 显示警告消息 | `message: string`：消息内容<br>`options: Omit<MessageOptions, 'message' | 'type'>`：配置选项 | `MessageInstance`：消息实例 |
-| `pureMessage.info(message, options)` | 显示信息消息 | `message: string`：消息内容<br>`options: Omit<MessageOptions, 'message' | 'type'>`：配置选项 | `MessageInstance`：消息实例 |
+| `pureMessage.default(message, options)` | 显示消息 | `message: string`：消息内容<br>`options: Omit<MessageOptions, 'message'>`：配置选项 | `MessageInstance`：消息实例 |
 | `pureMessage.closeAll()` | 关闭所有消息 | 无 | `void` |
 | `pureMessage.clearInstances()` | 清除所有消息实例记录 | 无 | `void` |
 
@@ -155,7 +117,6 @@ pureMessage.info('提示信息', {
 // 消息选项类型
 interface MessageOptions {
   message: string
-  type?: 'default' | 'primary' | 'success' | 'error' | 'warning' | 'info'
   duration?: number
   offset?: number
   showClose?: boolean

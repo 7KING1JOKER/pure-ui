@@ -3,7 +3,6 @@ import Message from './Message.vue'
 
 interface MessageOptions {
   message: string
-  type?: 'default' | 'primary' | 'success' | 'error' | 'warning' | 'info'
   duration?: number
   offset?: number
   showClose?: boolean
@@ -17,7 +16,7 @@ interface MessageInstance {
 const messageInstances: MessageInstance[] = []
 
 function createMessage(options: MessageOptions) {
-  const { message, type = 'default', duration = 3000, offset = 20, showClose = false } = options
+  const { message, duration = 3000, offset = 20, showClose = false } = options
 
   const container = document.createElement('div')
   document.body.appendChild(container)
@@ -32,7 +31,6 @@ function createMessage(options: MessageOptions) {
 
   const app = createApp(Message, {
     message,
-    type,
     duration,
     offset: currentOffset,
     showClose,
@@ -58,26 +56,10 @@ function createMessage(options: MessageOptions) {
 }
 
 export default {
-  default(message: string, options?: Omit<MessageOptions, 'message' | 'type'>) {
-    return createMessage({ message, type: 'default', ...options })
-  },
-  primary(message: string, options?: Omit<MessageOptions, 'message' | 'type'>) {
-    return createMessage({ message, type: 'primary', ...options })
-  },
-  success(message: string, options?: Omit<MessageOptions, 'message' | 'type'>) {
-    return createMessage({ message, type: 'success', ...options })
-  },
-  error(message: string, options?: Omit<MessageOptions, 'message' | 'type'>) {
-    return createMessage({ message, type: 'error', ...options })
-  },
-  warning(message: string, options?: Omit<MessageOptions, 'message' | 'type'>) {
-    return createMessage({ message, type: 'warning', ...options })
-  },
-  info(message: string, options?: Omit<MessageOptions, 'message' | 'type'>) {
-    return createMessage({ message, type: 'info', ...options })
+  default(message: string, options?: Omit<MessageOptions, 'message'>) {
+    return createMessage({ message, ...options })
   },
   closeAll() {
-    // 关闭所有消息实例
     messageInstances.forEach((instance) => {
       if (document.body.contains(instance.container)) {
         document.body.removeChild(instance.container)

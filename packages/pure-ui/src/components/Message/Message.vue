@@ -2,20 +2,13 @@
   <Transition name="message" appear >
     <div
       v-if="visible"
-      :class="['pure-message--container', `pure-message--${type}`]"
+      class="pure-message--container"
       :style="{ top: offset + 'px' }"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
     >
       <div class="pure-message--content">
-        <div class="pure-message--icon">
-          <span v-if="type === 'default'">ℹ️</span>
-          <span v-else-if="type === 'primary'">🔵</span>
-          <span v-else-if="type === 'success'">✅</span>
-          <span v-else-if="type === 'error'">❌</span>
-          <span v-else-if="type === 'warning'">⚠️</span>
-          <span v-else>ℹ️</span>
-        </div>
+        <div class="pure-message--icon">ℹ️</div>
         <div class="pure-message--text">{{ message }}</div>
         <div v-if="showClose" class="pure-message--close" @click="handleClose">✕</div>
       </div>
@@ -30,7 +23,6 @@ const emit = defineEmits(['close'])
 
 interface MessageProps {
   message: string
-  type?: 'default' | 'primary' | 'success' | 'error' | 'warning' | 'info'
   duration?: number
   offset?: number
   showClose?: boolean
@@ -39,7 +31,6 @@ interface MessageProps {
 }
 
 const props = withDefaults(defineProps<MessageProps>(), {
-  type: 'default',
   duration: 3000,
   offset: 20,
   showClose: false,
@@ -110,36 +101,6 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.pure-message--default {
-  background-color: var(--color-white);
-  color: var(--color-black);
-}
-
-.pure-message--primary {
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
-}
-
-.pure-message--success {
-  background-color: var(--color-success-light);
-  color: var(--color-success);
-}
-
-.pure-message--error {
-  background-color: var(--color-danger-light);
-  color: var(--color-danger);
-}
-
-.pure-message--warning {
-  background-color: var(--color-warning-light);
-  color: var(--color-warning);
-}
-
-.pure-message--info {
-  background-color: var(--color-info-light);
-  color: var(--color-info);
 }
 
 .pure-message--content {

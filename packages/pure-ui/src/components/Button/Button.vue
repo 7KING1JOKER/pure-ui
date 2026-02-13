@@ -1,8 +1,8 @@
 <template>
   <button
+    ref="buttonRef"
     :class="[
       'pure-button',
-      `pure-button--${type}`,
       `pure-button--${size}`,
       { 'pure-button--disabled': disabled },
       { 'pure-button--loading': loading },
@@ -10,6 +10,7 @@
     ]"
     :disabled="disabled || loading"
     @click="handleClick"
+    @mousedown="createRipple"
   >
     <span v-if="loading" class="pure-button__loading">
       <svg
@@ -24,19 +25,19 @@
         stroke-linejoin="round"
       >
         <circle cx="12" cy="12" r="10"></circle>
-        <path
-          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-        ></path>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
       </svg>
     </span>
-    <slot></slot>
+    <div class="ripples"></div>
+    <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
 
 <script setup lang="ts">
+import { ref, nextTick } from 'vue'
+
 // Button 组件属性类型定义
 interface ButtonProps {
-  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default'
   size?: 'large' | 'medium' | 'small'
   disabled?: boolean
   loading?: boolean
@@ -44,8 +45,7 @@ interface ButtonProps {
 }
 
 // Button 组件属性默认值
-withDefaults(defineProps<ButtonProps>(), {
-  type: 'default',
+const props = withDefaults(defineProps<ButtonProps>(), {
   size: 'medium',
   disabled: false,
   loading: false,
@@ -66,6 +66,67 @@ const emit = defineEmits<{
 const handleClick = (e: MouseEvent) => {
   emit('click', e)
 }
+
+// 按钮元素引用
+// eslint-disable-next-line no-undef
+const buttonRef = ref<HTMLButtonElement | null>(null)
+
+// 创建波纹效果函数
+const createRipple = (e: MouseEvent) => {
+  if(props.disabled || props.loading) return
+
+  const pageX = e.pageX
+  const pageY = e.pageY
+
+  // 获取按钮元素的位置信息
+  const target = buttonRef.value
+  if(!target) return
+  const rect = target.getBoundingClientRect()
+  const top = rect.top
+  const left = rect.left
+  const width = rect.width
+  const offsetX = pageX - left
+  const offsetY = pageY - top
+
+  const $ripple = makeRipple({
+    top: offsetY - ( width / 2 ),
+    left: offsetX - ( width / 2 ),
+    width: width,
+    height: width,
+  });
+
+  const $ripples = target.querySelector('.ripples')
+  if(!$ripples) return
+  $ripples.appendChild($ripple)
+
+  // 监听动画结束事件
+  const handleAnimationEnd = () => {
+    $ripple.removeEventListener('animationend', handleAnimationEnd)
+    $ripples.removeChild($ripple)
+  }
+
+  $ripple.addEventListener('animationend', handleAnimationEnd)
+
+  nextTick( () => {
+    $ripple.classList.remove('is-hidden')
+    $ripple.classList.add('is-pressed')
+  } );
+}
+
+function makeRipple({ top, left, width, height }: { top: number, left: number, width: number, height: number }) {
+  const $ripple = document.createElement('div')
+  
+  $ripple.style.cssText = `
+    top: ${ top }px; 
+    left: ${ left }px; 
+    width: ${ width }px; 
+    height: ${ height }px; 
+    background-color: rgba(0, 0, 0, 0.1);
+  `
+  $ripple.className = 'pure-button__ripple is-hidden'
+  return $ripple
+}
+
 </script>
 
 <style scoped>
@@ -76,67 +137,22 @@ const handleClick = (e: MouseEvent) => {
   font-weight: 500;
   white-space: nowrap;
   text-align: center;
-  border: none;
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-button);
-}
-
-.pure-button--default {
   background-color: var(--color-white);
   color: var(--color-black);
 }
 
-.pure-button--default:hover {
-  background-color: var(--color-disabled-bg);
+.pure-button:hover {
+  background-color: var(--color-border-light);
 }
 
-.pure-button--primary {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-}
-
-.pure-button--primary:hover {
-  background-color: var(--color-primary-hover);
-}
-
-.pure-button--success {
-  background-color: var(--color-success);
-  color: var(--color-white);
-}
-
-.pure-button--success:hover {
-  background-color: var(--color-success-hover);
-}
-
-.pure-button--warning {
-  background-color: var(--color-warning);
-  color: var(--color-white);
-}
-
-.pure-button--warning:hover {
-  background-color: var(--color-warning-hover);
-}
-
-.pure-button--danger {
-  background-color: var(--color-danger);
-  color: var(--color-white);
-}
-
-.pure-button--danger:hover {
-  background-color: var(--color-danger-hover);
-}
-
-.pure-button--info {
-  background-color: var(--color-info);
-  color: var(--color-white);
-}
-
-.pure-button--info:hover {
-  background-color: var(--color-info-hover);
+.pure-button:active {
+  box-shadow: var(--shadow-button-clicked);
 }
 
 .pure-button--large {
@@ -154,15 +170,13 @@ const handleClick = (e: MouseEvent) => {
   padding: var(--spacing-xs) var(--spacing-md);
 }
 
-.pure-button--disabled,
-.pure-button--disabled:hover {
-  background-color: var(--color-disabled);
+.pure-button--disabled {
+  background-color: var(--color-disabled-bg);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .pure-button--loading {
-  cursor: not-allowed;
   opacity: 0.6;
 }
 
@@ -182,6 +196,47 @@ const handleClick = (e: MouseEvent) => {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* 波纹效果容器 */
+.ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+</style>
+
+<style>
+/* 波纹效果 - 非 scoped 样式，确保动态创建的元素能够应用样式 */
+.pure-button .pure-button__ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  pointer-events: none;
+}
+
+.pure-button .is-hidden {
+  opacity: 0;
+}
+
+.pure-button .is-pressed {
+  animation: pureButtonRipple 0.6s linear forwards;
+}
+
+@keyframes pureButtonRipple {
+  from {
+    opacity: 1;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(2.5);
   }
 }
 </style>
