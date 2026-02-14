@@ -75,8 +75,8 @@ const buttonRef = ref<HTMLButtonElement | null>(null)
 const createRipple = (e: MouseEvent) => {
   if(props.disabled || props.loading) return
 
-  const pageX = e.pageX
-  const pageY = e.pageY
+  const clientX = e.clientX
+  const clientY = e.clientY
 
   // 获取按钮元素的位置信息
   const target = buttonRef.value
@@ -85,9 +85,10 @@ const createRipple = (e: MouseEvent) => {
   const top = rect.top
   const left = rect.left
   const width = rect.width
-  const offsetX = pageX - left
-  const offsetY = pageY - top
+  const offsetX = clientX - left
+  const offsetY = clientY - top
 
+  // 创建波纹元素(使用按钮宽度作为直径)
   const $ripple = makeRipple({
     top: offsetY - ( width / 2 ),
     left: offsetX - ( width / 2 ),
@@ -99,14 +100,7 @@ const createRipple = (e: MouseEvent) => {
   if(!$ripples) return
   $ripples.appendChild($ripple)
 
-  // 监听动画结束事件
-  const handleAnimationEnd = () => {
-    $ripple.removeEventListener('animationend', handleAnimationEnd)
-    $ripples.removeChild($ripple)
-  }
-
-  $ripple.addEventListener('animationend', handleAnimationEnd)
-
+  // 移除隐藏类名,添加按下类名,触发动画
   nextTick( () => {
     $ripple.classList.remove('is-hidden')
     $ripple.classList.add('is-pressed')
@@ -121,7 +115,7 @@ function makeRipple({ top, left, width, height }: { top: number, left: number, w
     left: ${ left }px; 
     width: ${ width }px; 
     height: ${ height }px; 
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
   `
   $ripple.className = 'pure-button__ripple is-hidden'
   return $ripple
@@ -148,7 +142,7 @@ function makeRipple({ top, left, width, height }: { top: number, left: number, w
 }
 
 .pure-button:hover {
-  background-color: var(--color-border-light);
+  background-color: var(--color-border-dark);
 }
 
 .pure-button:active {
@@ -174,6 +168,10 @@ function makeRipple({ top, left, width, height }: { top: number, left: number, w
   background-color: var(--color-disabled-bg);
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+.pure-button--disabled:hover {
+  background-color: var(--color-disabled-bg);
 }
 
 .pure-button--loading {

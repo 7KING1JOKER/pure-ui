@@ -1,16 +1,11 @@
 <template>
-  <div class="demo-container" style="background-color: rgba(0, 0, 0, 0.2);">
+  <div class="demo-container">
     <h1>Pure-UI Button 组件示例</h1>
     
     <section class="demo-section">
       <h2>按钮类型</h2>
       <div class="button-group">
         <pure-button>Default</pure-button>
-        <pure-button>Primary</pure-button>
-        <pure-button>Success</pure-button>
-        <pure-button>Warning</pure-button>
-        <pure-button>Danger</pure-button>
-        <pure-button>Info</pure-button>
       </div>
     </section>
 
@@ -57,21 +52,7 @@
         按钮被点击了 {{ clickCount }} 次
       </p>
     </section>
-
-    <section class="demo-section">
-      <h2>自定义内容</h2>
-      <div class="button-group">
-        <pure-button>
-          <span>🎉</span>
-          <span>Custom Content</span>
-        </pure-button>
-        <pure-button>
-          <span>✅</span>
-          <span>Success</span>
-        </pure-button>
-      </div>
-    </section>
-
+    
     <h1>Pure-UI Card 组件示例</h1>
     <section class="demo-section">
       <h2>Card - 垂直布局（col）</h2>
@@ -351,6 +332,7 @@ const showMessage = (type: 'default' | 'primary' | 'success' | 'error' | 'warnin
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+  background-color: rgba(0, 0, 0, 0.2);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
